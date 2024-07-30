@@ -25,11 +25,20 @@ interface HeaderProps {
       contacts: boolean;
     }>
   >;
+  setIsSubHeaderOpen: React.Dispatch<
+    React.SetStateAction<{
+      baby: boolean;
+      flowers: boolean;
+      accessories: boolean;
+      angels: boolean;
+    }>
+  >;
 }
 
 export default function Header({
   currentPage,
   setCurrentPage,
+  setIsSubHeaderOpen,
 }: Readonly<HeaderProps>) {
   const navigate = useNavigate();
   const restartCurrentPage = () => {
@@ -41,6 +50,16 @@ export default function Header({
       accessories: false,
       angels: false,
       contacts: false,
+    });
+  };
+
+  const restartIsSubHeaderOpen = () => {
+    console.log("restart")
+    setIsSubHeaderOpen({
+      baby: false,
+      flowers: false,
+      accessories: false,
+      angels: false,
     });
   };
 
@@ -59,6 +78,12 @@ export default function Header({
         onClick={() => {
           setNewCurrentPage("home");
           navigate("/");
+          setIsSubHeaderOpen({
+            baby: false,
+            flowers: false,
+            accessories: false,
+            angels: false,
+          });
         }}
       >
         <img src={Logo} alt="Flor de Linha Logo" />
@@ -69,7 +94,18 @@ export default function Header({
             currentPage.about ? styles.current : ""
           }`}
         >
-          <Link to="/about" onClick={() => setNewCurrentPage("about")}>
+          <Link
+            to="/about"
+            onClick={() => {
+              setNewCurrentPage("about");
+              setIsSubHeaderOpen({
+                baby: false,
+                flowers: false,
+                accessories: false,
+                angels: false,
+              });
+            }}
+          >
             Sobre
           </Link>
         </div>
@@ -78,46 +114,111 @@ export default function Header({
             currentPage.baby ? styles.current : ""
           }`}
         >
-          <Link to="/about" onClick={() => setNewCurrentPage("baby")}>
+          <span
+            onClick={() => {
+              setNewCurrentPage("baby");
+              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+                baby: prevIsSubHeaderopen.baby,
+                flowers: false,
+                accessories: false,
+                angels: false,
+              }));              
+              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+                ...prevIsSubHeaderopen,
+                baby: prevIsSubHeaderopen.baby ? false : true
+              }));
+            }}
+          >
             Bebé
-          </Link>
+          </span>
         </div>
         <div
           className={`${styles.headerPage} ${
             currentPage.flowers ? styles.current : ""
           }`}
         >
-          <Link to="/flowers" onClick={() => setNewCurrentPage("flowers")}>
+          <span
+            onClick={() => {
+              setNewCurrentPage("flowers");
+              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+                baby: false,
+                flowers: prevIsSubHeaderopen.flowers,
+                accessories: false,
+                angels: false,
+              }));              
+              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+                ...prevIsSubHeaderopen,
+                flowers: prevIsSubHeaderopen.flowers ? false : true
+              }));
+            }}
+          >
             Flores
-          </Link>
+          </span>
         </div>
         <div
           className={`${styles.headerPage} ${
             currentPage.accessories ? styles.current : ""
           }`}
         >
-          <Link
-            to="/accessories"
-            onClick={() => setNewCurrentPage("accessories")}
+          <span
+            onClick={() => {
+              setNewCurrentPage("accessories");
+              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+                baby: false,
+                flowers: false,
+                accessories: prevIsSubHeaderopen.accessories,
+                angels: false,
+              }));              
+              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+                ...prevIsSubHeaderopen,
+                accessories: prevIsSubHeaderopen.accessories ? false : true
+              }));
+            }}
           >
             Acessórios
-          </Link>
+          </span>
         </div>
         <div
           className={`${styles.headerPage} ${
             currentPage.angels ? styles.current : ""
           }`}
         >
-          <Link to="/angels" onClick={() => setNewCurrentPage("angels")}>
+          <Link
+            to="/angels"
+            onClick={() => {
+              setNewCurrentPage("angels");
+              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+                baby: false,
+                flowers: false,
+                accessories: false,
+                angels: prevIsSubHeaderopen.angels,
+              }));              
+              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+                ...prevIsSubHeaderopen,
+                angels: prevIsSubHeaderopen.angels ? false : true
+              }));
+            }}
+          >
             Anjinhos
           </Link>
         </div>
         <div
           className={`${styles.headerPage} ${
-            currentPage.angels ? styles.current : ""
+            currentPage.contacts ? styles.current : ""
           }`}
         >
-          <Link to="/contacts" onClick={() => setNewCurrentPage("contacts")}>
+          <Link
+            to="/contacts"
+            onClick={() => {
+              setNewCurrentPage("contacts");
+              setIsSubHeaderOpen({
+                baby: false,
+                flowers: false,
+                accessories: false,
+                angels: false,
+              });
+            }}
+          >
             Contactos
           </Link>
         </div>

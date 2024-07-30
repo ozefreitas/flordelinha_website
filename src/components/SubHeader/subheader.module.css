@@ -1,0 +1,18 @@
+.flexContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.mainSubHeaderContainer {
+    height: 0;
+    width: 70%;
+    background-color: aqua;
+    position: fixed;
+    margin: auto;
+    transition: height 0.3s ease-in-out;
+}
+
+.open {
+    height: 400px;
+    transition: height 0.3s ease-in-out;
+}

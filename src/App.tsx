@@ -8,6 +8,7 @@ import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
 import Footer from "./components/Footer/Footer";
+import SubHeader from "./components/SubHeader/SubHeader";
 
 function App() {
   const [currentPage, setCurrentPage] = useState({
@@ -19,12 +20,22 @@ function App() {
     angels: false,
     contacts: false,
   });
+  const [isSubHeaderOpen, setIsSubHeaderOpen] = useState({
+    baby: false,
+    flowers: false,
+    accessories: false,
+    angels: false,
+  });
+  console.log(isSubHeaderOpen)
+
   return (
     <div>
       <Header
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        setIsSubHeaderOpen={setIsSubHeaderOpen}
       ></Header>
+      <SubHeader isSubHeaderOpen={isSubHeaderOpen}></SubHeader>
       <div className="hiderContainer"></div>
       <div className="mainContentContainer">
         <Routes>

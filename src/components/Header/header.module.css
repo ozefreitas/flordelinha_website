@@ -51,6 +51,7 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+  cursor: pointer;
 }
 
 .headerPage::before {
@@ -70,7 +71,7 @@
   transform: translateX(0);
 }
 
-.headerPage a {
+.headerPage span, a {
   position: relative;
   z-index: 1;
 }

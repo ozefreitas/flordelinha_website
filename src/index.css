@@ -7,6 +7,7 @@
   --light-theme-text-color: #353535d3;
   --big-screens-font-size: 20px;
   --small-screens-font-size: 10px;
+  --header-color: #ece2dd;
   --link-hover: #fc888a;
   background-color: var(--light-theme-background-color);
   color: var(--light-theme-text-color);

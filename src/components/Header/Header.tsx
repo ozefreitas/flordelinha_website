@@ -1,6 +1,6 @@
 import styles from "./header.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "/flor_de_linha-removebg-preview.png";
+import Logo from "/flor_de_linha_no_bg_500px.png";
 
 interface Currentpage {
   home: boolean;

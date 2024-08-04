@@ -26,7 +26,6 @@ function App() {
     accessories: false,
     angels: false,
   });
-  console.log(isSubHeaderOpen)
 
   return (
     <div>

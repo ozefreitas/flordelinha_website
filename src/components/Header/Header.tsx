@@ -183,8 +183,7 @@ export default function Header({
             currentPage.angels ? styles.current : ""
           }`}
         >
-          <Link
-            to="/angels"
+          <span
             onClick={() => {
               setNewCurrentPage("angels");
               setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
@@ -200,7 +199,7 @@ export default function Header({
             }}
           >
             Anjinhos
-          </Link>
+          </span>
         </div>
         <div
           className={`${styles.headerPage} ${

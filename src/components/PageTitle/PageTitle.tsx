@@ -22,7 +22,8 @@ export default function PageTitle({ currentPage }: PageTitleProps) {
       if (isActive) {
         route_matches.map((route) => {
           if (route.path === pages) {
-            setPageTitle(route.page);
+            let newString = route.page[0].toUpperCase() + route.page.slice(1);
+            setPageTitle(newString);
           }
         });
       }

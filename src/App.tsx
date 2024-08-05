@@ -3,12 +3,13 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Header from "./components/Header/Header";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
 import Footer from "./components/Footer/Footer";
 import SubHeader from "./components/SubHeader/SubHeader";
+import PageTitle from "./components/PageTitle/PageTitle";
 
 function App() {
   const [currentPage, setCurrentPage] = useState({
@@ -36,6 +37,7 @@ function App() {
       ></Header>
       <SubHeader isSubHeaderOpen={isSubHeaderOpen}></SubHeader>
       <div className="hiderContainer"></div>
+      <PageTitle currentPage={currentPage}></PageTitle>
       <div className="mainContentContainer">
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>

@@ -23,6 +23,18 @@ export default function Footer() {
           <Link to="/">WhatsApp</Link>
         </div>
       </div>
+      <div id="pagelist" className={styles.pageListContainer}>
+        <Link to="/about">Sobre</Link>
+        <Link to="/about">Bebé</Link>
+        <Link to="/about">Flores</Link>
+        <Link to="/about">Acessórios</Link>
+        <Link to="/about">Anjinhos</Link>
+        <Link to="/about">Contactos</Link>
+      </div>
+      <div id="quickcontacts" className={styles.quickContactsContainer}>
+        <span>Telemóvel: <p>936472902</p></span>
+        <span>Email: <p>flordelinha@gmail.com</p></span>
+      </div>
       <div id="copyrights" className={styles.copyrightsContainer}>
         Todos os diretos reservados (2024). <br />É proibida a replicação exata
         dos produtos Flor de Linha para venda. Para postagem, deve ser

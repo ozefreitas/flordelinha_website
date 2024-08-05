@@ -1,5 +1,29 @@
 .mainFooterContainer {
-    background-color: #ff8989;
-    width: 100%;
-    height: 200px;
+  background-color: #ff8989;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.socialsContainer {
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.indivSocial {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 20px;
+}
+
+.copyrightsContainer {
+  width: 400px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: small;
 }

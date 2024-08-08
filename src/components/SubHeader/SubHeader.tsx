@@ -8,13 +8,17 @@ interface Subheaderprops {
     accessories: boolean;
     angels: boolean;
   };
+  subHeaderRef: React.RefObject<HTMLDivElement>;
 }
 
-export default function SubHeader({ isSubHeaderOpen }: Subheaderprops) {
-  console.log(isSubHeaderOpen);
+export default function SubHeader({
+  isSubHeaderOpen,
+  subHeaderRef,
+}: Subheaderprops) {
   return (
     <div id="subheader" className={styles.flexContainer}>
       <div
+        ref={subHeaderRef}
         className={`${styles.mainSubHeaderContainer} ${
           isSubHeaderOpen.baby ||
           isSubHeaderOpen.flowers ||

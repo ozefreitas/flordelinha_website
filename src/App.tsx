@@ -1,6 +1,4 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import { Route, Routes } from "react-router-dom";
@@ -9,6 +7,7 @@ import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
 import Footer from "./components/Footer/Footer";
 import SubHeader from "./components/SubHeader/SubHeader";
+import PageTitle from "./components/PageTitle/PageTitle";
 
 function App() {
   const [currentPage, setCurrentPage] = useState({
@@ -26,7 +25,50 @@ function App() {
     accessories: false,
     angels: false,
   });
-  console.log(isSubHeaderOpen)
+  const subHeaderRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseDown = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (target.closest("[data-exclude-click]")) {
+      return;
+    }
+    if (subHeaderRef.current) {
+      const rect = subHeaderRef.current.getBoundingClientRect();
+      const clickOutside =
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom;
+      if (clickOutside) {
+      }
+      setIsSubHeaderOpen({
+        baby: false,
+        flowers: false,
+        accessories: false,
+        angels: false,
+      });
+    }
+  };
+
+  const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+    if (event.code === "Escape") {
+      setIsSubHeaderOpen({
+        baby: false,
+        flowers: false,
+        accessories: false,
+        angels: false,
+      });
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   return (
     <div>
@@ -35,8 +77,12 @@ function App() {
         setCurrentPage={setCurrentPage}
         setIsSubHeaderOpen={setIsSubHeaderOpen}
       ></Header>
-      <SubHeader isSubHeaderOpen={isSubHeaderOpen}></SubHeader>
+      <SubHeader
+        isSubHeaderOpen={isSubHeaderOpen}
+        subHeaderRef={subHeaderRef}
+      ></SubHeader>
       <div className="hiderContainer"></div>
+      <PageTitle currentPage={currentPage}></PageTitle>
       <div className="mainContentContainer">
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>

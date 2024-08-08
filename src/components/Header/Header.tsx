@@ -1,6 +1,6 @@
 import styles from "./header.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "/flor_de_linha-removebg-preview.png";
+import Logo from "/flor_de_linha_no_bg_500px.png";
 
 interface Currentpage {
   home: boolean;
@@ -54,7 +54,6 @@ export default function Header({
   };
 
   const restartIsSubHeaderOpen = () => {
-    console.log("restart")
     setIsSubHeaderOpen({
       baby: false,
       flowers: false,
@@ -110,6 +109,7 @@ export default function Header({
           </Link>
         </div>
         <div
+          data-exclude-click
           className={`${styles.headerPage} ${
             currentPage.baby ? styles.current : ""
           }`}
@@ -122,10 +122,10 @@ export default function Header({
                 flowers: false,
                 accessories: false,
                 angels: false,
-              }));              
+              }));
               setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
                 ...prevIsSubHeaderopen,
-                baby: prevIsSubHeaderopen.baby ? false : true
+                baby: prevIsSubHeaderopen.baby ? false : true,
               }));
             }}
           >
@@ -133,6 +133,7 @@ export default function Header({
           </span>
         </div>
         <div
+          data-exclude-click
           className={`${styles.headerPage} ${
             currentPage.flowers ? styles.current : ""
           }`}
@@ -145,10 +146,10 @@ export default function Header({
                 flowers: prevIsSubHeaderopen.flowers,
                 accessories: false,
                 angels: false,
-              }));              
+              }));
               setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
                 ...prevIsSubHeaderopen,
-                flowers: prevIsSubHeaderopen.flowers ? false : true
+                flowers: prevIsSubHeaderopen.flowers ? false : true,
               }));
             }}
           >
@@ -156,6 +157,7 @@ export default function Header({
           </span>
         </div>
         <div
+          data-exclude-click
           className={`${styles.headerPage} ${
             currentPage.accessories ? styles.current : ""
           }`}
@@ -168,10 +170,10 @@ export default function Header({
                 flowers: false,
                 accessories: prevIsSubHeaderopen.accessories,
                 angels: false,
-              }));              
+              }));
               setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
                 ...prevIsSubHeaderopen,
-                accessories: prevIsSubHeaderopen.accessories ? false : true
+                accessories: prevIsSubHeaderopen.accessories ? false : true,
               }));
             }}
           >
@@ -179,12 +181,12 @@ export default function Header({
           </span>
         </div>
         <div
+          data-exclude-click
           className={`${styles.headerPage} ${
             currentPage.angels ? styles.current : ""
           }`}
         >
-          <Link
-            to="/angels"
+          <span
             onClick={() => {
               setNewCurrentPage("angels");
               setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
@@ -192,15 +194,15 @@ export default function Header({
                 flowers: false,
                 accessories: false,
                 angels: prevIsSubHeaderopen.angels,
-              }));              
+              }));
               setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
                 ...prevIsSubHeaderopen,
-                angels: prevIsSubHeaderopen.angels ? false : true
+                angels: prevIsSubHeaderopen.angels ? false : true,
               }));
             }}
           >
             Anjinhos
-          </Link>
+          </span>
         </div>
         <div
           className={`${styles.headerPage} ${

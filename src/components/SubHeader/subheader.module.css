@@ -1,18 +1,59 @@
 .flexContainer {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .mainSubHeaderContainer {
-    height: 0;
-    width: 70%;
-    background-color: aqua;
-    position: fixed;
-    margin: auto;
-    transition: height 0.3s ease-in-out;
+  height: 0;
+  width: 70%;
+  background-color: var(--header-color);
+  position: fixed;
+  margin-top: 140px;
+  transition: height 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.smallerFormattingContainer {
+  width: 70%;
+  height: 90%;
+}
+
+.subCategories {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  opacity: 0;
+  align-items: center;
+  /* transition: opacity 0.2s ease-in-out; */
+}
+
+.subCategories div {
+  font-size: var(--big-screens-font-size);
+  width: fit-content;
+  margin: 20px 0 20px 0;
 }
 
 .open {
-    height: 400px;
-    transition: height 0.3s ease-in-out;
+  height: 300px;
+  transition: height 0.3s ease-in-out;
+}
+
+.notShow {
+  max-height: 0;
+}
+
+.show {
+  display: flex;
+  transition: opacity 0.5s ease-in-out;
+  transition-delay: 0.3s;
+}
+
+.fade_in {
+  opacity: 1;
 }

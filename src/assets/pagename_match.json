@@ -1,0 +1,9 @@
+[
+  { "path": "about", "page": "sobre" },
+  { "path": "accessories", "page": "acessórios" },
+  { "path": "angels", "page": "anjinhos" },
+  { "path": "baby", "page": "bebé" },
+  { "path": "contacts", "page": "contactos" },
+  { "path": "flowers", "page": "flores" },
+  { "path": "home", "page": "home" }
+]

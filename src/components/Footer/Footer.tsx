@@ -24,16 +24,20 @@ export default function Footer() {
         </div>
       </div>
       <div id="pagelist" className={styles.pageListContainer}>
-        <Link to="/about">Sobre</Link>
-        <Link to="/about">Bebé</Link>
-        <Link to="/about">Flores</Link>
-        <Link to="/about">Acessórios</Link>
-        <Link to="/about">Anjinhos</Link>
-        <Link to="/about">Contactos</Link>
+        <Link>Sobre</Link>
+        <Link>Bebé</Link>
+        <Link>Flores</Link>
+        <Link>Acessórios</Link>
+        <Link>Anjinhos</Link>
+        <Link>Contactos</Link>
       </div>
       <div id="quickcontacts" className={styles.quickContactsContainer}>
-        <span>Telemóvel: <p>936472902</p></span>
-        <span>Email: <p>flordelinha@gmail.com</p></span>
+        <span>
+          Telemóvel: <p>936472902</p>
+        </span>
+        <span>
+          Email: <p>flordelinha@gmail.com</p>
+        </span>
       </div>
       <div id="copyrights" className={styles.copyrightsContainer}>
         Todos os diretos reservados (2024). <br />É proibida a replicação exata

@@ -1,9 +1,7 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
@@ -27,6 +25,37 @@ function App() {
     accessories: false,
     angels: false,
   });
+  const subHeaderRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseDown = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (target.closest("[data-exclude-click]")) {
+      return;
+    }
+    if (subHeaderRef.current) {
+      const rect = subHeaderRef.current.getBoundingClientRect();
+      const clickOutside =
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom;
+      if (clickOutside) {
+      }
+      setIsSubHeaderOpen({
+        baby: false,
+        flowers: false,
+        accessories: false,
+        angels: false,
+      });
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleMouseDown);
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+    };
+  });
 
   return (
     <div>
@@ -35,7 +64,10 @@ function App() {
         setCurrentPage={setCurrentPage}
         setIsSubHeaderOpen={setIsSubHeaderOpen}
       ></Header>
-      <SubHeader isSubHeaderOpen={isSubHeaderOpen}></SubHeader>
+      <SubHeader
+        isSubHeaderOpen={isSubHeaderOpen}
+        subHeaderRef={subHeaderRef}
+      ></SubHeader>
       <div className="hiderContainer"></div>
       <PageTitle currentPage={currentPage}></PageTitle>
       <div className="mainContentContainer">

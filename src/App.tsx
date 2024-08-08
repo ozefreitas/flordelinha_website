@@ -50,10 +50,23 @@ function App() {
     }
   };
 
+  const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+    if (event.code === "Escape") {
+      setIsSubHeaderOpen({
+        baby: false,
+        flowers: false,
+        accessories: false,
+        angels: false,
+      });
+    }
+  };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   });
 

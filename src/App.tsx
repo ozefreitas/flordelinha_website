@@ -40,13 +40,13 @@ function App() {
         event.clientY < rect.top ||
         event.clientY > rect.bottom;
       if (clickOutside) {
+        setIsSubHeaderOpen({
+          baby: false,
+          flowers: false,
+          accessories: false,
+          angels: false,
+        });
       }
-      setIsSubHeaderOpen({
-        baby: false,
-        flowers: false,
-        accessories: false,
-        angels: false,
-      });
     }
   };
 

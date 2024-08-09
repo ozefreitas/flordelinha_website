@@ -1,0 +1,86 @@
+.mainHeaderContainer {
+  height: 8rem;
+  width: 99%;
+  background-color: var(--header-color);
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  top: 10px;
+  z-index: 3;
+}
+
+.logoContainer {
+  position: relative;
+  cursor: pointer;
+}
+
+.logoContainer img {
+  width: 8rem;
+  height: 8rem;
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  -webkit-transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  -moz-transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  -ms-transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  -o-transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.logoContainer img:hover {
+  filter: drop-shadow(0 0 2em var(--link-hover));
+  -webkit-filter: drop-shadow(0 0 2em var(--link-hover));
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+
+.headers {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--big-screens-font-size);
+}
+
+.headerPage {
+  padding: 20px 40px 20px 40px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  cursor: pointer;
+}
+
+.headerPage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: pink;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  z-index: 0;
+}
+
+.headerPage:hover::before {
+  transform: translateX(0);
+}
+
+.headerPage span, a {
+  position: relative;
+  z-index: 1;
+}
+
+.headerPage a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.current {
+  background-color: var(--link-hover);
+}

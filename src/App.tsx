@@ -1,35 +1,98 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect, useRef } from "react";
+import "./App.css";
+import Header from "./components/Header/Header";
+import { Route, Routes } from "react-router-dom";
+import About from "./pages/About/About";
+import Home from "./pages/Home/Home";
+import Contacts from "./pages/Contacts/Contacts";
+import Footer from "./components/Footer/Footer";
+import SubHeader from "./components/SubHeader/SubHeader";
+import PageTitle from "./components/PageTitle/PageTitle";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState({
+    home: false,
+    about: false,
+    baby: false,
+    flowers: false,
+    accessories: false,
+    angels: false,
+    contacts: false,
+  });
+  const [isSubHeaderOpen, setIsSubHeaderOpen] = useState({
+    baby: false,
+    flowers: false,
+    accessories: false,
+    angels: false,
+  });
+  const subHeaderRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseDown = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (target.closest("[data-exclude-click]")) {
+      return;
+    }
+    if (subHeaderRef.current) {
+      const rect = subHeaderRef.current.getBoundingClientRect();
+      const clickOutside =
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom;
+      if (clickOutside) {
+      }
+      setIsSubHeaderOpen({
+        baby: false,
+        flowers: false,
+        accessories: false,
+        angels: false,
+      });
+    }
+  };
+
+  const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+    if (event.code === "Escape") {
+      setIsSubHeaderOpen({
+        baby: false,
+        flowers: false,
+        accessories: false,
+        angels: false,
+      });
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <Header
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        setIsSubHeaderOpen={setIsSubHeaderOpen}
+      ></Header>
+      <SubHeader
+        isSubHeaderOpen={isSubHeaderOpen}
+        subHeaderRef={subHeaderRef}
+      ></SubHeader>
+      <div className="hiderContainer"></div>
+      <PageTitle currentPage={currentPage}></PageTitle>
+      <div className="mainContentContainer">
+        <Routes>
+          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/about" element={<About></About>}></Route>
+          <Route path="/contacts" element={<Contacts></Contacts>}></Route>
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <Footer></Footer>
+    </div>
+  );
 }
 
-export default App
+export default App;

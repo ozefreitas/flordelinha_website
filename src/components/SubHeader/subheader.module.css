@@ -39,6 +39,10 @@
   margin: 20px 0 20px 0;
 }
 
+.notShow div {
+  display: none;
+}
+
 .open {
   height: 300px;
   transition: height 0.3s ease-in-out;

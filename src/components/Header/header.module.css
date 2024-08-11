@@ -58,8 +58,8 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: -1px;
+  width: 110%;
   height: 100%;
   background-color: pink;
   transform: translateX(-100%);
@@ -71,7 +71,7 @@
   transform: translateX(0);
 }
 
-.headerPage span, a {
+.headerPage span {
   position: relative;
   z-index: 1;
 }

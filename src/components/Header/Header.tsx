@@ -92,137 +92,119 @@ export default function Header({
           className={`${styles.headerPage} ${
             currentPage.about ? styles.current : ""
           }`}
+          onClick={() => {
+            navigate("/about");
+            setNewCurrentPage("about");
+            setIsSubHeaderOpen({
+              baby: false,
+              flowers: false,
+              accessories: false,
+              angels: false,
+            });
+          }}
         >
-          <Link
-            to="/about"
-            onClick={() => {
-              setNewCurrentPage("about");
-              setIsSubHeaderOpen({
-                baby: false,
-                flowers: false,
-                accessories: false,
-                angels: false,
-              });
-            }}
-          >
-            Sobre
-          </Link>
+          <span>Sobre</span>
         </div>
         <div
           data-exclude-click
           className={`${styles.headerPage} ${
             currentPage.baby ? styles.current : ""
           }`}
+          onClick={() => {
+            setNewCurrentPage("baby");
+            setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+              baby: prevIsSubHeaderopen.baby,
+              flowers: false,
+              accessories: false,
+              angels: false,
+            }));
+            setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+              ...prevIsSubHeaderopen,
+              baby: prevIsSubHeaderopen.baby ? false : true,
+            }));
+          }}
         >
-          <span
-            onClick={() => {
-              setNewCurrentPage("baby");
-              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
-                baby: prevIsSubHeaderopen.baby,
-                flowers: false,
-                accessories: false,
-                angels: false,
-              }));
-              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
-                ...prevIsSubHeaderopen,
-                baby: prevIsSubHeaderopen.baby ? false : true,
-              }));
-            }}
-          >
-            Bebé
-          </span>
+          <span>Bebé</span>
         </div>
         <div
           data-exclude-click
           className={`${styles.headerPage} ${
             currentPage.flowers ? styles.current : ""
           }`}
+          onClick={() => {
+            setNewCurrentPage("flowers");
+            setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+              baby: false,
+              flowers: prevIsSubHeaderopen.flowers,
+              accessories: false,
+              angels: false,
+            }));
+            setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+              ...prevIsSubHeaderopen,
+              flowers: prevIsSubHeaderopen.flowers ? false : true,
+            }));
+          }}
         >
-          <span
-            onClick={() => {
-              setNewCurrentPage("flowers");
-              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
-                baby: false,
-                flowers: prevIsSubHeaderopen.flowers,
-                accessories: false,
-                angels: false,
-              }));
-              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
-                ...prevIsSubHeaderopen,
-                flowers: prevIsSubHeaderopen.flowers ? false : true,
-              }));
-            }}
-          >
-            Flores
-          </span>
+          <span>Flores</span>
         </div>
         <div
           data-exclude-click
           className={`${styles.headerPage} ${
             currentPage.accessories ? styles.current : ""
           }`}
+          onClick={() => {
+            setNewCurrentPage("accessories");
+            setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+              baby: false,
+              flowers: false,
+              accessories: prevIsSubHeaderopen.accessories,
+              angels: false,
+            }));
+            setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+              ...prevIsSubHeaderopen,
+              accessories: prevIsSubHeaderopen.accessories ? false : true,
+            }));
+          }}
         >
-          <span
-            onClick={() => {
-              setNewCurrentPage("accessories");
-              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
-                baby: false,
-                flowers: false,
-                accessories: prevIsSubHeaderopen.accessories,
-                angels: false,
-              }));
-              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
-                ...prevIsSubHeaderopen,
-                accessories: prevIsSubHeaderopen.accessories ? false : true,
-              }));
-            }}
-          >
-            Acessórios
-          </span>
+          <span>Acessórios</span>
         </div>
         <div
           data-exclude-click
           className={`${styles.headerPage} ${
             currentPage.angels ? styles.current : ""
           }`}
+          onClick={() => {
+            setNewCurrentPage("angels");
+            setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+              baby: false,
+              flowers: false,
+              accessories: false,
+              angels: prevIsSubHeaderopen.angels,
+            }));
+            setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
+              ...prevIsSubHeaderopen,
+              angels: prevIsSubHeaderopen.angels ? false : true,
+            }));
+          }}
         >
-          <span
-            onClick={() => {
-              setNewCurrentPage("angels");
-              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
-                baby: false,
-                flowers: false,
-                accessories: false,
-                angels: prevIsSubHeaderopen.angels,
-              }));
-              setIsSubHeaderOpen((prevIsSubHeaderopen) => ({
-                ...prevIsSubHeaderopen,
-                angels: prevIsSubHeaderopen.angels ? false : true,
-              }));
-            }}
-          >
-            Anjinhos
-          </span>
+          <span>Anjinhos</span>
         </div>
         <div
           className={`${styles.headerPage} ${
             currentPage.contacts ? styles.current : ""
           }`}
+          onClick={() => {
+            navigate("/contacts");
+            setNewCurrentPage("contacts");
+            setIsSubHeaderOpen({
+              baby: false,
+              flowers: false,
+              accessories: false,
+              angels: false,
+            });
+          }}
         >
-          <Link
-            to="/contacts"
-            onClick={() => {
-              setNewCurrentPage("contacts");
-              setIsSubHeaderOpen({
-                baby: false,
-                flowers: false,
-                accessories: false,
-                angels: false,
-              });
-            }}
-          >
-            Contactos
-          </Link>
+          <span>Contactos</span>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
@@ -26,6 +26,7 @@ function App() {
     angels: false,
   });
   const subHeaderRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   const handleMouseDown = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
@@ -69,6 +70,10 @@ function App() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   });
+
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, [location]);
 
   return (
     <div>

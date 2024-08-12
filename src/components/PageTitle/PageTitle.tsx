@@ -13,12 +13,20 @@ interface PageTitleProps {
     angels: boolean;
     contacts: boolean;
   };
+  pageTitleHeight: number;
+  isSticky: boolean;
+  lastPosition: number;
 }
 
-export default function PageTitle({ currentPage }: Readonly<PageTitleProps>) {
+export default function PageTitle({
+  currentPage,
+  pageTitleHeight,
+  isSticky,
+  lastPosition,
+}: Readonly<PageTitleProps>) {
   const [pageTitle, setPageTitle] = useState("Home");
   const [animate, setAnimate] = useState(false);
-
+  console.log(lastPosition);
   const location = useLocation().pathname;
   useEffect(() => {
     Object.entries(currentPage).map(([pages, isActive]) => {
@@ -47,6 +55,12 @@ export default function PageTitle({ currentPage }: Readonly<PageTitleProps>) {
       className={`${styles.mainPageTitleContainer} ${
         animate ? styles.animate : ""
       }`}
+      style={{
+        height: `${pageTitleHeight}px`,
+        position: isSticky ? "fixed" : "relative",
+        marginTop: !isSticky ? "35dvh" : `${lastPosition}px`,
+        width: isSticky ? "100%" : ""
+      }}
     >
       {pageTitle}
     </div>

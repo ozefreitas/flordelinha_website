@@ -14,6 +14,7 @@ interface PageTitleProps {
     contacts: boolean;
   };
   pageTitleHeight: number;
+  pageTitleFontSize: number;
   isSticky: boolean;
   lastPosition: number;
 }
@@ -21,6 +22,7 @@ interface PageTitleProps {
 export default function PageTitle({
   currentPage,
   pageTitleHeight,
+  pageTitleFontSize,
   isSticky,
   lastPosition,
 }: Readonly<PageTitleProps>) {
@@ -59,7 +61,8 @@ export default function PageTitle({
         height: `${pageTitleHeight}px`,
         position: isSticky ? "fixed" : "relative",
         marginTop: !isSticky ? "35dvh" : `${lastPosition}px`,
-        width: isSticky ? "100%" : ""
+        width: isSticky ? "100%" : "",
+        fontSize: `${pageTitleFontSize}px`,
       }}
     >
       {pageTitle}

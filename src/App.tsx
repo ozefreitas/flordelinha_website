@@ -28,6 +28,7 @@ function App() {
   const [pageTitleHeight, setPageTitleHeight] = useState(350);
   const [lastPosition, setLastPosition] = useState(0);
   const [isSticky, setIsSticky] = useState(false);
+  const [pageTitleFontSize, setPageTitleFontSize] = useState(80);
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
@@ -69,6 +70,7 @@ function App() {
     const scrollPosition = window.scrollY;
     if (scrollPosition >= 160 && !isSticky) {
       setPageTitleHeight(150);
+      setPageTitleFontSize(50);
       setLastPosition(160);
       setIsSticky(true);
     } else if (scrollPosition < 160 && isSticky) {
@@ -76,7 +78,9 @@ function App() {
     } else if (!isSticky) {
       console.log(scrollPosition);
       const newHeight = Math.max(150, 350 - scrollPosition * 2);
+      const newFontSize = Math.max(50, 80 - scrollPosition / 3.2);
       setPageTitleHeight(newHeight);
+      setPageTitleFontSize(newFontSize);
     }
   };
 
@@ -110,6 +114,7 @@ function App() {
       <PageTitle
         currentPage={currentPage}
         pageTitleHeight={pageTitleHeight}
+        pageTitleFontSize={pageTitleFontSize}
         isSticky={isSticky}
         lastPosition={lastPosition}
       ></PageTitle>

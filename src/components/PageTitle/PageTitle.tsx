@@ -60,7 +60,7 @@ export default function PageTitle({
       style={{
         height: `${pageTitleHeight}px`,
         position: isSticky ? "fixed" : "relative",
-        marginTop: !isSticky ? "35dvh" : `${lastPosition}px`,
+        marginTop: !isSticky ? "250px" : `${lastPosition}px`,
         width: isSticky ? "100%" : "",
         fontSize: `${pageTitleFontSize}px`,
       }}

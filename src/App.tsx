@@ -97,6 +97,10 @@ function App() {
 
   useEffect(() => {
     scrollTo(0, 0);
+    setLastPosition(0)
+    setPageTitleHeight(300)
+    setIsSticky(false)
+    setPageTitleFontSize(100)
   }, [location]);
 
   return (

@@ -25,10 +25,10 @@ function App() {
     accessories: false,
     angels: false,
   });
-  const [pageTitleHeight, setPageTitleHeight] = useState(350);
+  const [pageTitleHeight, setPageTitleHeight] = useState(300);
   const [lastPosition, setLastPosition] = useState(0);
   const [isSticky, setIsSticky] = useState(false);
-  const [pageTitleFontSize, setPageTitleFontSize] = useState(80);
+  const [pageTitleFontSize, setPageTitleFontSize] = useState(100);
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
@@ -68,17 +68,17 @@ function App() {
 
   const handleDynamicHeight = () => {
     const scrollPosition = window.scrollY;
-    if (scrollPosition >= 160 && !isSticky) {
+    if (scrollPosition >= 100 && !isSticky) {
       setPageTitleHeight(150);
       setPageTitleFontSize(50);
-      setLastPosition(160);
+      setLastPosition(150);
       setIsSticky(true);
-    } else if (scrollPosition < 160 && isSticky) {
+    } else if (scrollPosition < 100 && isSticky) {
       setIsSticky(false);
     } else if (!isSticky) {
       console.log(scrollPosition);
-      const newHeight = Math.max(150, 350 - scrollPosition * 2);
-      const newFontSize = Math.max(50, 80 - scrollPosition / 3.2);
+      const newHeight = Math.max(150, 300 - scrollPosition * 2);
+      const newFontSize = Math.max(50, 100 - scrollPosition / 1.5);
       setPageTitleHeight(newHeight);
       setPageTitleFontSize(newFontSize);
     }

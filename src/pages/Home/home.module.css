@@ -1,3 +1,32 @@
 .mainHomeContainer {
-    
+  width: 100%;
+}
+
+.magic_div {
+  width: 100%;
+  font-size: 60px;
+  transform: translateY(500%);
+  transition: transform 1s ease-out, opacity 1s ease-out;
+  z-index: 10;
+  opacity: 0;
+  -webkit-transition: transform 1s ease-out, opacity 1s ease-out;
+  -moz-transition: transform 1s ease-out, opacity 1s ease-out;
+  -ms-transition: transform 1s ease-out, opacity 1s ease-out;
+  -o-transition: transform 1s ease-out, opacity 1s ease-out;
+  -webkit-transform: translateY(500%);
+  -moz-transform: translateY(500%);
+  -ms-transform: translateY(500%);
+  -o-transform: translateY(500%);
+  text-align: center;
+}
+
+.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.sticked {
+  position: fixed;
+  left: 0;
+  top: 308px;
 }

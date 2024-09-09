@@ -31,6 +31,7 @@ function App() {
   const [pageTitleFontSize, setPageTitleFontSize] = useState(100);
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const [visible, setVisible] = useState(false)
 
   const handleMouseDown = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
@@ -68,6 +69,7 @@ function App() {
 
   const handleDynamicHeight = () => {
     const scrollPosition = window.scrollY;
+    console.log(scrollPosition)
     if (scrollPosition >= 100 && !isSticky) {
       setPageTitleHeight(100);
       setPageTitleFontSize(50);
@@ -76,11 +78,18 @@ function App() {
     } else if (scrollPosition < 100 && isSticky) {
       setIsSticky(false);
     } else if (!isSticky) {
-      console.log(scrollPosition);
       const newHeight = Math.max(100, 250 - scrollPosition * 3);
       const newFontSize = Math.max(50, 100 - scrollPosition);
       setPageTitleHeight(newHeight);
       setPageTitleFontSize(newFontSize);
+    }
+    const magicDiv = document.getElementById("magic_div");
+    if (magicDiv) {
+      if (scrollPosition > 100) {
+        setVisible(true)
+      } else {
+        setVisible(false)
+      }
     }
   };
 
@@ -97,10 +106,10 @@ function App() {
 
   useEffect(() => {
     scrollTo(0, 0);
-    setLastPosition(0)
-    setPageTitleHeight(250)
-    setIsSticky(false)
-    setPageTitleFontSize(100)
+    setLastPosition(0);
+    setPageTitleHeight(250);
+    setIsSticky(false);
+    setPageTitleFontSize(100);
   }, [location]);
 
   return (
@@ -115,6 +124,7 @@ function App() {
         subHeaderRef={subHeaderRef}
       ></SubHeader>
       <div className="hiderContainer"></div>
+      <div className="hiderContainer2"></div>
       <PageTitle
         currentPage={currentPage}
         pageTitleHeight={pageTitleHeight}
@@ -122,7 +132,10 @@ function App() {
         isSticky={isSticky}
         lastPosition={lastPosition}
       ></PageTitle>
-      <div className="mainContentContainer">
+      <div
+        className="mainContentContainer"
+        style={{ top: isSticky ? "350px" : "" }}
+      >
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/about" element={<About></About>}></Route>

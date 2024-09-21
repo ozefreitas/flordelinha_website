@@ -134,7 +134,7 @@ function App() {
       ></PageTitle>
       <div
         className="mainContentContainer"
-        style={{ top: isSticky ? "350px" : "" }}
+        style={{ top: isSticky ? "670px" : "" }}
       >
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>

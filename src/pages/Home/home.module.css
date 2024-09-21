@@ -28,5 +28,14 @@
 .sticked {
   position: fixed;
   left: 0;
-  top: 308px;
+  top: 400px;
+}
+
+.disapear {
+  transform: translateY(-200%);
+  -webkit-transform: translateY(-200%);
+  -moz-transform: translateY(-200%);
+  -ms-transform: translateY(-200%);
+  -o-transform: translateY(-200%);
+  opacity: 0;
 }

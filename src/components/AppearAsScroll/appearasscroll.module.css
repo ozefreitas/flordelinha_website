@@ -1,0 +1,18 @@
+.scroll_animation {
+  opacity: 0;
+  transform: translateY(200px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  -webkit-transform: translateY(200px);
+  -moz-transform: translateY(200px);
+  -ms-transform: translateY(200px);
+  -o-transform: translateY(200px);
+  -webkit-transition: opacity 1s ease-out, transform 1s ease-out;
+  -moz-transition: opacity 1s ease-out, transform 1s ease-out;
+  -ms-transition: opacity 1s ease-out, transform 1s ease-out;
+  -o-transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.scroll_animation.visible {
+  opacity: 1;
+  transform: translateY(0); /* Moves element to original position */
+}

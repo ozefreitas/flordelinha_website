@@ -31,6 +31,7 @@ function App() {
   const [pageTitleFontSize, setPageTitleFontSize] = useState(100);
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const [hasAnimatedFirstDiv, setHasAnimatedFirstDiv] = useState(false);
 
   const handleMouseDown = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
@@ -68,6 +69,7 @@ function App() {
 
   const handleDynamicHeight = () => {
     const scrollPosition = window.scrollY;
+    console.log(scrollPosition);
     if (scrollPosition >= 100 && !isSticky) {
       setPageTitleHeight(100);
       setPageTitleFontSize(50);
@@ -76,7 +78,6 @@ function App() {
     } else if (scrollPosition < 100 && isSticky) {
       setIsSticky(false);
     } else if (!isSticky) {
-      console.log(scrollPosition);
       const newHeight = Math.max(100, 250 - scrollPosition * 3);
       const newFontSize = Math.max(50, 100 - scrollPosition);
       setPageTitleHeight(newHeight);
@@ -97,11 +98,15 @@ function App() {
 
   useEffect(() => {
     scrollTo(0, 0);
-    setLastPosition(0)
-    setPageTitleHeight(250)
-    setIsSticky(false)
-    setPageTitleFontSize(100)
+    setLastPosition(0);
+    setPageTitleHeight(250);
+    setIsSticky(false);
+    setPageTitleFontSize(100);
   }, [location]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
@@ -115,6 +120,7 @@ function App() {
         subHeaderRef={subHeaderRef}
       ></SubHeader>
       <div className="hiderContainer"></div>
+      <div className="hiderContainer2"></div>
       <PageTitle
         currentPage={currentPage}
         pageTitleHeight={pageTitleHeight}
@@ -122,9 +128,19 @@ function App() {
         isSticky={isSticky}
         lastPosition={lastPosition}
       ></PageTitle>
-      <div className="mainContentContainer">
+      <div
+        className="mainContentContainer"
+      >
         <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
+          <Route
+            path="/"
+            element={
+              <Home
+                hasAnimatedFirstDiv={hasAnimatedFirstDiv}
+                setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
+              ></Home>
+            }
+          ></Route>
           <Route path="/about" element={<About></About>}></Route>
           <Route path="/contacts" element={<Contacts></Contacts>}></Route>
         </Routes>

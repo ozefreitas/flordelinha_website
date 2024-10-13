@@ -28,8 +28,8 @@ export default function PageTitle({
 }: Readonly<PageTitleProps>) {
   const [pageTitle, setPageTitle] = useState("Home");
   const [animate, setAnimate] = useState(false);
-  console.log(lastPosition);
   const location = useLocation().pathname;
+  
   useEffect(() => {
     Object.entries(currentPage).map(([pages, isActive]) => {
       if (isActive) {

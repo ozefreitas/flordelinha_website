@@ -1,5 +1,5 @@
 .hiderContainer {
-  height: 140px;
+  height: 142px;
   width: 100%;
   left: 0;
   top: 0;
@@ -8,13 +8,25 @@
   background-color: #f0f0f0;
 }
 
+.hiderContainer2 {
+  height: 115px;
+  width: 100%;
+  left: 0;
+  top: 140px;
+  position: fixed;
+  z-index: -3;
+  box-shadow: 0px 10px 50px 50px var(--light-theme-background-color);
+  background-color: var(--light-theme-background-color);
+}
+
 .mainContentContainer {
   min-height: 200vh;
-  margin-top: 20px;
+  margin-top: 370px;
   margin-left: 50px;
   margin-right: 50px;
-  z-index: 0;
-  padding-top: 50px;
+  position: relative;
+  z-index: -5;
+  top: 250px
 }
 
 .logo {

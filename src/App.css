@@ -21,12 +21,12 @@
 
 .mainContentContainer {
   min-height: 200vh;
-  margin-top: 20px;
+  margin-top: 370px;
   margin-left: 50px;
   margin-right: 50px;
   position: relative;
   z-index: -5;
-  padding-top: 150px;
+  top: 250px
 }
 
 .logo {

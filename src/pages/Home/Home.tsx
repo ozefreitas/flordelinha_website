@@ -1,62 +1,72 @@
 import styles from "./home.module.css";
 import { useEffect, useState } from "react";
+import AppearAsScroll from "../../components/AppearAsScroll/AppearAsScroll";
 
-export default function Home() {
+interface HomeProps {
+  hasAnimatedFirstDiv: boolean;
+  setHasAnimatedFirstDiv: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Home({
+  hasAnimatedFirstDiv,
+  setHasAnimatedFirstDiv,
+}: HomeProps) {
   const [visible, setVisible] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
-  const [disapear, setDisapear] = useState(false);
 
-  const divs = [
-    document.getElementById("welcome"),
-    document.getElementById("objectives"),
-    document.getElementById("div3"),
-    document.getElementById("div4"),
-    document.getElementById("div5"),
-  ];
-
-  const ranges = [
-    { start: 100, end: 450 },
-    { start: 450, end: 800 },
-    { start: 1400, end: 2000 },
-    { start: 2000, end: 2600 },
-    { start: 2600, end: 3200 },
-  ];
-
-  const handleDynamicHeight = () => {
+  const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    divs.forEach((div, index) => {
-      const { start, end } = ranges[index];
-      if (div) {
-        if (scrollPosition >= start) {
-          div.classList.add("visible");
-          if (scrollPosition >= start && scrollPosition <= end) {
-            div.classList.add("sticked");
-            div.classList.remove("disapear");
-          } else {
-            setIsSticky(false);
-            setDisapear(true);
-          }
-        } else {
-          setVisible(false);
-          div.classList.remove("visible");
-        }
-      }
-    });
+    if (scrollPosition >= 150) {
+      console.log(visible);
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleDynamicHeight);
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when the component unmounts
     return () => {
-      window.removeEventListener("scroll", handleDynamicHeight);
+      window.removeEventListener("scroll", handleScroll);
     };
   });
 
   return (
-    <div id="home" className={styles.mainHomeContainer}>
-      <div id="welcome" className="magic_div">
-        Bem-Vind@ à Flor de Linha
-      </div>
-      <div id="objectives" className="magic_div"></div>
+    <div id="home" className={`${styles.mainHomeContainer} ${visible ? styles.visible : styles.disapear}`}>
+      <AppearAsScroll
+        hasAnimatedFirstDiv={hasAnimatedFirstDiv}
+        setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
+        isFirstDivFromPage={true}
+      >
+        <div style={{ height: "300px", backgroundColor: "#4caf50" }}>
+          <h1>Bem-Vind@ à Flor de Linha</h1>
+        </div>
+      </AppearAsScroll>
+      <AppearAsScroll
+        hasAnimatedFirstDiv={hasAnimatedFirstDiv}
+        setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
+        isFirstDivFromPage={false}
+      >
+        <div style={{ height: "300px", backgroundColor: "red" }}>
+          <h1>
+            O objetivo desta loja é começar a ganhar algum para depois dar um
+            porsche ao meu namorado
+          </h1>
+        </div>
+      </AppearAsScroll>
+      <AppearAsScroll
+        hasAnimatedFirstDiv={hasAnimatedFirstDiv}
+        setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
+        isFirstDivFromPage={false}
+      >
+        <div style={{ height: "300px", backgroundColor: "yellow" }}>
+          <h1>
+            O objetivo desta loja é começar a ganhar algum para depois dar um
+            porsche ao meu namorado
+          </h1>
+        </div>
+      </AppearAsScroll>
     </div>
   );
 }

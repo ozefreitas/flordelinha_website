@@ -31,7 +31,7 @@ function App() {
   const [pageTitleFontSize, setPageTitleFontSize] = useState(100);
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const [visible, setVisible] = useState(false)
+  const [hasAnimatedFirstDiv, setHasAnimatedFirstDiv] = useState(false);
 
   const handleMouseDown = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
@@ -69,7 +69,7 @@ function App() {
 
   const handleDynamicHeight = () => {
     const scrollPosition = window.scrollY;
-    console.log(scrollPosition)
+    console.log(scrollPosition);
     if (scrollPosition >= 100 && !isSticky) {
       setPageTitleHeight(100);
       setPageTitleFontSize(50);
@@ -82,14 +82,6 @@ function App() {
       const newFontSize = Math.max(50, 100 - scrollPosition);
       setPageTitleHeight(newHeight);
       setPageTitleFontSize(newFontSize);
-    }
-    const magicDiv = document.getElementById("magic_div");
-    if (magicDiv) {
-      if (scrollPosition > 100) {
-        setVisible(true)
-      } else {
-        setVisible(false)
-      }
     }
   };
 
@@ -111,6 +103,10 @@ function App() {
     setIsSticky(false);
     setPageTitleFontSize(100);
   }, [location]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
@@ -134,10 +130,17 @@ function App() {
       ></PageTitle>
       <div
         className="mainContentContainer"
-        style={{ top: isSticky ? "670px" : "" }}
       >
         <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
+          <Route
+            path="/"
+            element={
+              <Home
+                hasAnimatedFirstDiv={hasAnimatedFirstDiv}
+                setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
+              ></Home>
+            }
+          ></Route>
           <Route path="/about" element={<About></About>}></Route>
           <Route path="/contacts" element={<Contacts></Contacts>}></Route>
         </Routes>

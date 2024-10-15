@@ -5,41 +5,69 @@ import AppearAsScroll from "../../components/AppearAsScroll/AppearAsScroll";
 interface HomeProps {
   hasAnimatedFirstDiv: boolean;
   setHasAnimatedFirstDiv: React.Dispatch<React.SetStateAction<boolean>>;
+  windowHeight: number;
 }
 
 export default function Home({
   hasAnimatedFirstDiv,
   setHasAnimatedFirstDiv,
-}: HomeProps) {
+  windowHeight,
+}: Readonly<HomeProps>) {
   const [visible, setVisible] = useState(false);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    if (scrollPosition >= 150) {
-      console.log(visible);
+    const scrollLimit = windowHeight >= 850 ? 250 : 200;
+    if (scrollPosition >= scrollLimit) {
       setVisible(true);
     } else {
       setVisible(false);
     }
   };
 
+  const handleSlowScroll = (event: WheelEvent) => {
+    // Prevent default scroll behavior
+    event.preventDefault();
+    const scrollPosition = window.scrollY;
+
+    // Apply slower scrolling
+    if (scrollPosition >= 150) {
+      window.scrollBy({
+        top: event.deltaY * 1.2,
+        behavior: "smooth",
+      });
+    } else {
+      window.scrollBy({
+        top: event.deltaY * 1.5,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("wheel", handleSlowScroll, { passive: false });
 
     // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleSlowScroll);
     };
   });
 
   return (
-    <div id="home" className={`${styles.mainHomeContainer} ${visible ? styles.visible : styles.disapear}`}>
+    <div
+      id="home"
+      className={`${styles.mainHomeContainer} ${
+        visible ? styles.visible : styles.disapear
+      }`}
+    >
       <AppearAsScroll
         hasAnimatedFirstDiv={hasAnimatedFirstDiv}
         setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
         isFirstDivFromPage={true}
       >
-        <div style={{ height: "300px", backgroundColor: "#4caf50" }}>
+        <div style={{ height: "500px", backgroundColor: "#4caf50" }}>
           <h1>Bem-Vind@ à Flor de Linha</h1>
         </div>
       </AppearAsScroll>
@@ -48,7 +76,7 @@ export default function Home({
         setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
         isFirstDivFromPage={false}
       >
-        <div style={{ height: "300px", backgroundColor: "red" }}>
+        <div style={{ height: "500px", backgroundColor: "red" }}>
           <h1>
             O objetivo desta loja é começar a ganhar algum para depois dar um
             porsche ao meu namorado
@@ -60,7 +88,7 @@ export default function Home({
         setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
         isFirstDivFromPage={false}
       >
-        <div style={{ height: "300px", backgroundColor: "yellow" }}>
+        <div style={{ height: "1000px", backgroundColor: "yellow" }}>
           <h1>
             O objetivo desta loja é começar a ganhar algum para depois dar um
             porsche ao meu namorado

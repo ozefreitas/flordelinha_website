@@ -17,6 +17,7 @@ interface PageTitleProps {
   pageTitleFontSize: number;
   isSticky: boolean;
   lastPosition: number;
+  windowHeight: number;
 }
 
 export default function PageTitle({
@@ -25,15 +26,16 @@ export default function PageTitle({
   pageTitleFontSize,
   isSticky,
   lastPosition,
+  windowHeight,
 }: Readonly<PageTitleProps>) {
   const [pageTitle, setPageTitle] = useState("Home");
   const [animate, setAnimate] = useState(false);
   const location = useLocation().pathname;
-  
+
   useEffect(() => {
-    Object.entries(currentPage).map(([pages, isActive]) => {
+    Object.entries(currentPage).forEach(([pages, isActive]) => {
       if (isActive) {
-        route_matches.map((route) => {
+        route_matches.forEach((route) => {
           if (route.path === pages) {
             let newString = route.page[0].toUpperCase() + route.page.slice(1);
             setPageTitle(newString);
@@ -60,7 +62,11 @@ export default function PageTitle({
       style={{
         height: `${pageTitleHeight}px`,
         position: isSticky ? "fixed" : "relative",
-        marginTop: !isSticky ? "250px" : `${lastPosition}px`,
+        marginTop: !isSticky
+          ? windowHeight >= 850
+            ? "350px"
+            : "250px"
+          : `${lastPosition}px`,
         width: isSticky ? "100%" : "",
         fontSize: `${pageTitleFontSize}px`,
       }}

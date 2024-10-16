@@ -3,21 +3,17 @@ import { useEffect, useState } from "react";
 import AppearAsScroll from "../../components/AppearAsScroll/AppearAsScroll";
 
 interface HomeProps {
-  hasAnimatedFirstDiv: boolean;
-  setHasAnimatedFirstDiv: React.Dispatch<React.SetStateAction<boolean>>;
   windowHeight: number;
 }
 
 export default function Home({
-  hasAnimatedFirstDiv,
-  setHasAnimatedFirstDiv,
   windowHeight,
 }: Readonly<HomeProps>) {
   const [visible, setVisible] = useState(false);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    const scrollLimit = windowHeight >= 850 ? 250 : 200;
+    const scrollLimit = windowHeight >= 800 ? 250 : 200;
     if (scrollPosition >= scrollLimit) {
       setVisible(true);
     } else {
@@ -63,18 +59,12 @@ export default function Home({
       }`}
     >
       <AppearAsScroll
-        hasAnimatedFirstDiv={hasAnimatedFirstDiv}
-        setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
-        isFirstDivFromPage={true}
       >
         <div style={{ height: "500px", backgroundColor: "#4caf50" }}>
           <h1>Bem-Vind@ à Flor de Linha</h1>
         </div>
       </AppearAsScroll>
       <AppearAsScroll
-        hasAnimatedFirstDiv={hasAnimatedFirstDiv}
-        setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
-        isFirstDivFromPage={false}
       >
         <div style={{ height: "500px", backgroundColor: "red" }}>
           <h1>
@@ -84,9 +74,6 @@ export default function Home({
         </div>
       </AppearAsScroll>
       <AppearAsScroll
-        hasAnimatedFirstDiv={hasAnimatedFirstDiv}
-        setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
-        isFirstDivFromPage={false}
       >
         <div style={{ height: "1000px", backgroundColor: "yellow" }}>
           <h1>

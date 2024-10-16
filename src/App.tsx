@@ -31,7 +31,6 @@ function App() {
   const [pageTitleFontSize, setPageTitleFontSize] = useState(100);
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const [hasAnimatedFirstDiv, setHasAnimatedFirstDiv] = useState(false);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   console.log(windowHeight)
   const handleResize = () => {
@@ -74,7 +73,7 @@ function App() {
 
   const handleDynamicHeight = () => {
     const scrollPosition = window.scrollY;
-    if (windowHeight >= 850) {
+    if (windowHeight >= 800) {
       if (scrollPosition >= 200 && !isSticky) {
         setPageTitleHeight(150);
         setPageTitleFontSize(50);
@@ -156,8 +155,6 @@ function App() {
             element={
               <Home
                 windowHeight={windowHeight}
-                hasAnimatedFirstDiv={hasAnimatedFirstDiv}
-                setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
               ></Home>
             }
           ></Route>

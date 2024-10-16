@@ -3,17 +3,11 @@ import styles from "./appearasscroll.module.css";
 
 interface ScrollAnimationProps {
   children: React.ReactNode;
-  hasAnimatedFirstDiv: boolean;
-  setHasAnimatedFirstDiv: React.Dispatch<React.SetStateAction<boolean>>;
-  isFirstDivFromPage: boolean;
 }
 
 export default function AppearAsScroll({
   children,
-  hasAnimatedFirstDiv,
-  setHasAnimatedFirstDiv,
-  isFirstDivFromPage,
-}: ScrollAnimationProps) {
+}: Readonly<ScrollAnimationProps>) {
   const elementRef = useRef(null); // Reference to the DOM element
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -22,7 +16,6 @@ export default function AppearAsScroll({
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
-            setHasAnimatedFirstDiv(true)
             setHasAnimated(true);
             if (elementRef.current) {
               observer.unobserve(entry.target);

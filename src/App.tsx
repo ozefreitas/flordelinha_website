@@ -28,10 +28,16 @@ function App() {
   const [pageTitleHeight, setPageTitleHeight] = useState(250);
   const [lastPosition, setLastPosition] = useState(0);
   const [isSticky, setIsSticky] = useState(false);
-  const [pageTitleFontSize, setPageTitleFontSize] = useState(100);
+  const [pageTitleFontSize, setPageTitleFontSize] = useState(
+    window.innerHeight >= 800 ? 120 : 100
+  );
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const [hasAnimatedFirstDiv, setHasAnimatedFirstDiv] = useState(false);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  console.log(windowHeight);
+  const handleResize = () => {
+    setWindowHeight(window.innerHeight);
+  };
 
   const handleMouseDown = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
@@ -69,19 +75,34 @@ function App() {
 
   const handleDynamicHeight = () => {
     const scrollPosition = window.scrollY;
-    console.log(scrollPosition);
-    if (scrollPosition >= 100 && !isSticky) {
-      setPageTitleHeight(100);
-      setPageTitleFontSize(50);
-      setLastPosition(150);
-      setIsSticky(true);
-    } else if (scrollPosition < 100 && isSticky) {
-      setIsSticky(false);
-    } else if (!isSticky) {
-      const newHeight = Math.max(100, 250 - scrollPosition * 3);
-      const newFontSize = Math.max(50, 100 - scrollPosition);
-      setPageTitleHeight(newHeight);
-      setPageTitleFontSize(newFontSize);
+    if (windowHeight >= 800) {
+      if (scrollPosition >= 200 && !isSticky) {
+        setPageTitleHeight(150);
+        setPageTitleFontSize(70);
+        setLastPosition(150);
+        setIsSticky(true);
+      } else if (scrollPosition < 200 && isSticky) {
+        setIsSticky(false);
+      } else if (!isSticky) {
+        const newHeight = Math.max(150, 250 - scrollPosition * 3);
+        const newFontSize = Math.max(70, 120 - scrollPosition * 1.8);
+        setPageTitleHeight(newHeight);
+        setPageTitleFontSize(newFontSize);
+      }
+    } else {
+      if (scrollPosition >= 100 && !isSticky) {
+        setPageTitleHeight(100);
+        setPageTitleFontSize(50);
+        setLastPosition(150);
+        setIsSticky(true);
+      } else if (scrollPosition < 100 && isSticky) {
+        setIsSticky(false);
+      } else if (!isSticky) {
+        const newHeight = Math.max(100, 250 - scrollPosition * 3);
+        const newFontSize = Math.max(50, 100 - scrollPosition);
+        setPageTitleHeight(newHeight);
+        setPageTitleFontSize(newFontSize);
+      }
     }
   };
 
@@ -89,10 +110,12 @@ function App() {
     document.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("keydown", handleKeyDown);
     window.addEventListener("scroll", handleDynamicHeight);
+    window.addEventListener("resize", handleResize);
     return () => {
       document.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("scroll", handleDynamicHeight);
+      window.removeEventListener("resize", handleResize);
     };
   });
 
@@ -104,9 +127,7 @@ function App() {
     setPageTitleFontSize(100);
   }, [location]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => {});
 
   return (
     <div>
@@ -127,19 +148,13 @@ function App() {
         pageTitleFontSize={pageTitleFontSize}
         isSticky={isSticky}
         lastPosition={lastPosition}
+        windowHeight={windowHeight}
       ></PageTitle>
-      <div
-        className="mainContentContainer"
-      >
+      <div className="mainContentContainer">
         <Routes>
           <Route
             path="/"
-            element={
-              <Home
-                hasAnimatedFirstDiv={hasAnimatedFirstDiv}
-                setHasAnimatedFirstDiv={setHasAnimatedFirstDiv}
-              ></Home>
-            }
+            element={<Home windowHeight={windowHeight}></Home>}
           ></Route>
           <Route path="/about" element={<About></About>}></Route>
           <Route path="/contacts" element={<Contacts></Contacts>}></Route>

@@ -1,0 +1,27 @@
+.mainAboutContainer {
+    width: 100%;
+    transition: transform 0.5s ease-out, opacity 1s ease-out;
+    -webkit-transition: transform 0.5s ease-out, opacity 1s ease-out;
+    -moz-transition: transform 0.5s ease-out, opacity 1s ease-out;
+    -ms-transition: transform 0.5s ease-out, opacity 1s ease-out;
+    -o-transition: transform 0.5s ease-out, opacity 1s ease-out;
+  }
+  
+  .visible {
+    transform: translateX(0);
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+  
+  .disapear {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    opacity: 0;
+  }
+  

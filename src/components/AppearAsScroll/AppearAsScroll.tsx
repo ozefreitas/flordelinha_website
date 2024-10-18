@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./appearasscroll.module.css";
 
 interface ScrollAnimationProps {
@@ -10,6 +11,11 @@ export default function AppearAsScroll({
 }: Readonly<ScrollAnimationProps>) {
   const elementRef = useRef(null); // Reference to the DOM element
   const [hasAnimated, setHasAnimated] = useState(false);
+  const location = useLocation()
+
+  useEffect(() => {
+    setHasAnimated(false)
+  }, [location.pathname])
 
   useEffect(() => {
     const observer = new IntersectionObserver(

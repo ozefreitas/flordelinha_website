@@ -78,7 +78,6 @@ function App() {
   const handleDynamicHeight = () => {
     const scrollPosition = window.scrollY;
     if (windowHeight >= 800) {
-      console.log(scrollPosition)
       if (scrollPosition >= 200 && !isSticky) {
         setPageTitleHeight(150);
         setPageTitleFontSize(70);
@@ -111,7 +110,6 @@ function App() {
 
   useEffect(() => {
     handleDynamicHeight();
-
   }, [windowHeight]);
 
   useEffect(() => {
@@ -128,12 +126,12 @@ function App() {
   });
 
   useEffect(() => {
-    scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" });
     setLastPosition(0);
     setPageTitleHeight(window.innerHeight >= 800 ? 250 : 180);
     setIsSticky(false);
     setPageTitleFontSize(window.innerHeight >= 800 ? 120 : 90);
-  }, [location]);
+  }, [location.pathname]);
 
   return (
     <div>
@@ -147,8 +145,16 @@ function App() {
         isSubHeaderOpen={isSubHeaderOpen}
         subHeaderRef={subHeaderRef}
       ></SubHeader>
-      <div className={`hiderContainer ${windowHeight >= 800 ? "" : "smallHeightScreen"}`}></div>
-      <div className={`hiderContainer2 ${windowHeight >= 800 ? "" : "smallHeightScreen"}`}></div>
+      <div
+        className={`hiderContainer ${
+          windowHeight >= 800 ? "" : "smallHeightScreen"
+        }`}
+      ></div>
+      <div
+        className={`hiderContainer2 ${
+          windowHeight >= 800 ? "" : "smallHeightScreen"
+        }`}
+      ></div>
       <PageTitle
         currentPage={currentPage}
         pageTitleHeight={pageTitleHeight}
@@ -163,8 +169,14 @@ function App() {
             path="/"
             element={<Home windowHeight={windowHeight}></Home>}
           ></Route>
-          <Route path="/about" element={<About></About>}></Route>
-          <Route path="/contacts" element={<Contacts></Contacts>}></Route>
+          <Route
+            path="/about"
+            element={<About windowHeight={windowHeight}></About>}
+          ></Route>
+          <Route
+            path="/contacts"
+            element={<Contacts windowHeight={windowHeight}></Contacts>}
+          ></Route>
         </Routes>
       </div>
       <Footer></Footer>

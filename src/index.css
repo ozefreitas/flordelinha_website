@@ -6,6 +6,7 @@
   --light-theme-background-color: #f0f0f0ea; 
   --light-theme-text-color: #353535d3;
   --big-screens-font-size: 20px;
+  --small-height-screens-font-size: 17px;
   --small-screens-font-size: 10px;
   --header-color: #ece2dd;
   --link-hover: #fc888a;
@@ -16,6 +17,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 a {

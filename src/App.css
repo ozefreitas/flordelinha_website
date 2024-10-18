@@ -36,6 +36,13 @@
   top: 400px
 }
 
+@media (width >= 1600px) {
+  .mainContentContainer {
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

@@ -19,6 +19,15 @@
   background-color: var(--light-theme-background-color);
 }
 
+.hiderContainer.smallHeightScreen {
+  height: 110px;
+}
+
+.hiderContainer2.smallHeightScreen {
+  top: 108px;
+  height: 90px;
+}
+
 .mainContentContainer {
   min-height: 200vh;
   margin: 370px 50px 450px 50px;

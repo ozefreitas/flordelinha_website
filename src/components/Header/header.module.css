@@ -9,6 +9,10 @@
   z-index: 3;
 }
 
+.mainHeaderContainer.smallHeightScreen {
+  height: 6rem;
+}
+
 .logoContainer {
   position: relative;
   cursor: pointer;
@@ -22,6 +26,11 @@
   -moz-transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
   -ms-transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
   -o-transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.logoContainer.smallHeightScreen img {
+  height: 6rem;
+  width: 6rem;
 }
 
 .logoContainer img:hover {
@@ -39,6 +48,10 @@
   align-items: center;
   gap: 10px;
   font-size: var(--big-screens-font-size);
+}
+
+.headers.smallHeightScreen {
+  font-size: var(--small-height-screens-font-size);
 }
 
 .headerPage {

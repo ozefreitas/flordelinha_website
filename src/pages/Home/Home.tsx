@@ -6,9 +6,7 @@ interface HomeProps {
   windowHeight: number;
 }
 
-export default function Home({
-  windowHeight,
-}: Readonly<HomeProps>) {
+export default function Home({ windowHeight }: Readonly<HomeProps>) {
   const [visible, setVisible] = useState(false);
 
   const handleScroll = () => {
@@ -24,20 +22,9 @@ export default function Home({
   const handleSlowScroll = (event: WheelEvent) => {
     // Prevent default scroll behavior
     event.preventDefault();
-    const scrollPosition = window.scrollY;
 
     // Apply slower scrolling
-    if (scrollPosition >= 150) {
-      window.scrollBy({
-        top: event.deltaY * 1.2,
-        behavior: "smooth",
-      });
-    } else {
-      window.scrollBy({
-        top: event.deltaY * 1.5,
-        behavior: "smooth",
-      });
-    }
+    window.scrollBy(0, event.deltaY * 1);
   };
 
   useEffect(() => {
@@ -58,14 +45,12 @@ export default function Home({
         visible ? styles.visible : styles.disapear
       }`}
     >
-      <AppearAsScroll
-      >
+      <AppearAsScroll>
         <div style={{ height: "500px", backgroundColor: "#4caf50" }}>
           <h1>Bem-Vind@ à Flor de Linha</h1>
         </div>
       </AppearAsScroll>
-      <AppearAsScroll
-      >
+      <AppearAsScroll>
         <div style={{ height: "500px", backgroundColor: "red" }}>
           <h1>
             O objetivo desta loja é começar a ganhar algum para depois dar um
@@ -73,8 +58,7 @@ export default function Home({
           </h1>
         </div>
       </AppearAsScroll>
-      <AppearAsScroll
-      >
+      <AppearAsScroll>
         <div style={{ height: "1000px", backgroundColor: "yellow" }}>
           <h1>
             O objetivo desta loja é começar a ganhar algum para depois dar um

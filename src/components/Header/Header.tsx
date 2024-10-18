@@ -33,12 +33,14 @@ interface HeaderProps {
       angels: boolean;
     }>
   >;
+  windowHeight: number;
 }
 
 export default function Header({
   currentPage,
   setCurrentPage,
   setIsSubHeaderOpen,
+  windowHeight,
 }: Readonly<HeaderProps>) {
   const navigate = useNavigate();
   const restartCurrentPage = () => {
@@ -71,9 +73,16 @@ export default function Header({
   };
 
   return (
-    <div id="header" className={styles.mainHeaderContainer}>
+    <div
+      id="header"
+      className={`${styles.mainHeaderContainer} ${
+        windowHeight >= 800 ? "" : styles.smallHeightScreen
+      }`}
+    >
       <div
-        className={styles.logoContainer}
+        className={`${styles.logoContainer} ${
+          windowHeight >= 800 ? "" : styles.smallHeightScreen
+        }`}
         onClick={() => {
           setNewCurrentPage("home");
           navigate("/");
@@ -87,7 +96,11 @@ export default function Header({
       >
         <img src={Logo} alt="Flor de Linha Logo" />
       </div>
-      <div className={styles.headers}>
+      <div
+        className={`${styles.headers} ${
+          windowHeight >= 800 ? "" : styles.smallHeightScreen
+        }`}
+      >
         <div
           className={`${styles.headerPage} ${
             currentPage.about ? styles.current : ""

@@ -25,16 +25,18 @@ function App() {
     accessories: false,
     angels: false,
   });
-  const [pageTitleHeight, setPageTitleHeight] = useState(250);
+  const [pageTitleHeight, setPageTitleHeight] = useState(
+    window.innerHeight >= 800 ? 250 : 180
+  );
   const [lastPosition, setLastPosition] = useState(0);
   const [isSticky, setIsSticky] = useState(false);
   const [pageTitleFontSize, setPageTitleFontSize] = useState(
-    window.innerHeight >= 800 ? 120 : 100
+    window.innerHeight >= 800 ? 120 : 90
   );
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  console.log(windowHeight);
+
   const handleResize = () => {
     setWindowHeight(window.innerHeight);
   };
@@ -76,6 +78,7 @@ function App() {
   const handleDynamicHeight = () => {
     const scrollPosition = window.scrollY;
     if (windowHeight >= 800) {
+      console.log(scrollPosition)
       if (scrollPosition >= 200 && !isSticky) {
         setPageTitleHeight(150);
         setPageTitleFontSize(70);
@@ -91,20 +94,25 @@ function App() {
       }
     } else {
       if (scrollPosition >= 100 && !isSticky) {
-        setPageTitleHeight(100);
-        setPageTitleFontSize(50);
-        setLastPosition(150);
+        setPageTitleHeight(90);
+        setPageTitleFontSize(40);
+        setLastPosition(120);
         setIsSticky(true);
       } else if (scrollPosition < 100 && isSticky) {
         setIsSticky(false);
       } else if (!isSticky) {
-        const newHeight = Math.max(100, 250 - scrollPosition * 3);
-        const newFontSize = Math.max(50, 100 - scrollPosition);
+        const newHeight = Math.max(90, 180 - scrollPosition * 3);
+        const newFontSize = Math.max(40, 90 - scrollPosition * 1.5);
         setPageTitleHeight(newHeight);
         setPageTitleFontSize(newFontSize);
       }
     }
   };
+
+  useEffect(() => {
+    handleDynamicHeight();
+
+  }, [windowHeight]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleMouseDown);
@@ -122,12 +130,10 @@ function App() {
   useEffect(() => {
     scrollTo(0, 0);
     setLastPosition(0);
-    setPageTitleHeight(250);
+    setPageTitleHeight(window.innerHeight >= 800 ? 250 : 180);
     setIsSticky(false);
-    setPageTitleFontSize(100);
+    setPageTitleFontSize(window.innerHeight >= 800 ? 120 : 90);
   }, [location]);
-
-  useEffect(() => {});
 
   return (
     <div>
@@ -135,13 +141,14 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         setIsSubHeaderOpen={setIsSubHeaderOpen}
+        windowHeight={windowHeight}
       ></Header>
       <SubHeader
         isSubHeaderOpen={isSubHeaderOpen}
         subHeaderRef={subHeaderRef}
       ></SubHeader>
-      <div className="hiderContainer"></div>
-      <div className="hiderContainer2"></div>
+      <div className={`hiderContainer ${windowHeight >= 800 ? "" : "smallHeightScreen"}`}></div>
+      <div className={`hiderContainer2 ${windowHeight >= 800 ? "" : "smallHeightScreen"}`}></div>
       <PageTitle
         currentPage={currentPage}
         pageTitleHeight={pageTitleHeight}

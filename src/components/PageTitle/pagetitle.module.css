@@ -1,5 +1,5 @@
 .mainPageTitleContainer {
-  width: calc(100% + 16px);
+  /* width: calc(100% + 16px); */
   margin-left: -8px;
   margin-right: -8px;
   background-color: coral;
@@ -21,13 +21,13 @@
 
 @keyframes slideIn {
   from {
-    transform: translateY(-100%);
+    transform: translateY(-00%);
     opacity: 0;
-    -webkit-transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    -o-transform: translateY(-100%);
-  }
+    -webkit-transform: translateY(-00%);
+    -moz-transform: translateY(-00%);
+    -ms-transform: translateY(-00%);
+    -o-transform: translateY(-00%);
+}
   to {
     transform: translateY(0);
     opacity: 1;

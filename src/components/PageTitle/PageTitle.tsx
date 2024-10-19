@@ -18,6 +18,7 @@ interface PageTitleProps {
   isSticky: boolean;
   lastPosition: number;
   windowHeight: number;
+  scrollDirection: string;
 }
 
 export default function PageTitle({
@@ -27,9 +28,12 @@ export default function PageTitle({
   isSticky,
   lastPosition,
   windowHeight,
+  scrollDirection,
 }: Readonly<PageTitleProps>) {
   const [pageTitle, setPageTitle] = useState("Home");
   const [animate, setAnimate] = useState(false);
+  const [topReduction, setTopReduction] = useState(0);
+  const [widthReduction, setWidthReduction] = useState(100);
   const location = useLocation().pathname;
 
   useEffect(() => {
@@ -53,15 +57,25 @@ export default function PageTitle({
     }
   }, [animate]);
 
+  useEffect(() => {
+    if (scrollDirection == "down") {
+      setTopReduction(-130);
+      setWidthReduction(80);
+    } else {
+      setTopReduction(0);
+      setWidthReduction(100);
+    }
+  }, [scrollDirection]);
+
   return (
     <div
       id="pagetitle"
-      className={`${styles.mainPageTitleContainer} ${
-        animate ? styles.animate : ""
-      }`}
+      className={`${styles.mainPageTitleContainer} 
+      ${animate ? styles.animate : ""}`}
       style={{
         height: `${pageTitleHeight}px`,
         position: isSticky ? "fixed" : "relative",
+        top: `${topReduction}px`,
         marginTop: !isSticky
           ? windowHeight >= 850
             ? "350px"
@@ -69,6 +83,7 @@ export default function PageTitle({
           : `${lastPosition}px`,
         width: isSticky ? "100%" : "",
         fontSize: `${pageTitleFontSize}px`,
+        transition: "top 1.2s ease, width 1s ease-in-out",
       }}
     >
       {pageTitle}

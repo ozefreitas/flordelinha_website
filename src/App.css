@@ -19,6 +19,36 @@
   background-color: var(--light-theme-background-color);
 }
 
+.opened {
+  transition: transform 1s ease-out;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  -webkit-transition: transform 1s ease-out;
+  -moz-transition: transform 1s ease-out;
+  -ms-transition: transform 1s ease-out;
+  -o-transition: transform 1s ease-out;
+}
+
+.close {
+  transition: transform 1s ease-out;
+  transform: translateY(-110%);
+  -webkit-transform: translateY(-110%);
+  -moz-transform: translateY(-110%);
+  -ms-transform: translateY(-110%);
+  -o-transform: translateY(-110%);
+  -webkit-transition: transform 1s ease-out;
+  -moz-transition: transform 1s ease-out;
+  -ms-transition: transform 1s ease-out;
+  -o-transition: transform 1s ease-out;
+}
+
+.hiderContainer.close {
+  transition-delay: 0.1s;
+}
+
 .hiderContainer.smallHeightScreen {
   height: 110px;
 }

@@ -36,6 +36,8 @@ function App() {
   const subHeaderRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState("up");
 
   const handleResize = () => {
     setWindowHeight(window.innerHeight);
@@ -108,6 +110,19 @@ function App() {
     }
   };
 
+  const handleScrollDirection = () => {
+    const scrollPosition = window.scrollY;
+    if (scrollPosition >= 350) {
+      if (scrollPosition > lastScrollPosition) {
+        setLastScrollPosition(scrollPosition);
+        setScrollDirection("down");
+      } else {
+        setLastScrollPosition(scrollPosition);
+        setScrollDirection("up");
+      }
+    }
+  };
+
   useEffect(() => {
     handleDynamicHeight();
   }, [windowHeight]);
@@ -116,11 +131,13 @@ function App() {
     document.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("keydown", handleKeyDown);
     window.addEventListener("scroll", handleDynamicHeight);
+    window.addEventListener("scroll", handleScrollDirection);
     window.addEventListener("resize", handleResize);
     return () => {
       document.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("scroll", handleDynamicHeight);
+      window.removeEventListener("scroll", handleScrollDirection);
       window.removeEventListener("resize", handleResize);
     };
   });
@@ -140,6 +157,7 @@ function App() {
         setCurrentPage={setCurrentPage}
         setIsSubHeaderOpen={setIsSubHeaderOpen}
         windowHeight={windowHeight}
+        scrollDirection={scrollDirection}
       ></Header>
       <SubHeader
         isSubHeaderOpen={isSubHeaderOpen}
@@ -148,12 +166,12 @@ function App() {
       <div
         className={`hiderContainer ${
           windowHeight >= 800 ? "" : "smallHeightScreen"
-        }`}
+        } ${scrollDirection == "down" ? "close" : "opened"}`}
       ></div>
       <div
         className={`hiderContainer2 ${
           windowHeight >= 800 ? "" : "smallHeightScreen"
-        }`}
+        } ${scrollDirection == "down" ? "close" : "opened"}`}
       ></div>
       <PageTitle
         currentPage={currentPage}
@@ -162,6 +180,7 @@ function App() {
         isSticky={isSticky}
         lastPosition={lastPosition}
         windowHeight={windowHeight}
+        scrollDirection={scrollDirection}
       ></PageTitle>
       <div className="mainContentContainer">
         <Routes>

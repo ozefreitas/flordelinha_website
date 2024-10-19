@@ -34,6 +34,7 @@ interface HeaderProps {
     }>
   >;
   windowHeight: number;
+  scrollDirection: string;
 }
 
 export default function Header({
@@ -41,6 +42,7 @@ export default function Header({
   setCurrentPage,
   setIsSubHeaderOpen,
   windowHeight,
+  scrollDirection,
 }: Readonly<HeaderProps>) {
   const navigate = useNavigate();
   const restartCurrentPage = () => {
@@ -75,9 +77,9 @@ export default function Header({
   return (
     <div
       id="header"
-      className={`${styles.mainHeaderContainer} ${
-        windowHeight >= 800 ? "" : styles.smallHeightScreen
-      }`}
+      className={`${styles.mainHeaderContainer} 
+      ${windowHeight >= 800 ? "" : styles.smallHeightScreen} 
+      ${scrollDirection == "down" ? "close" : "opened"}`}
     >
       <div
         className={`${styles.logoContainer} ${
